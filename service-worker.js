@@ -1,4 +1,4 @@
-const CACHE_NAME = "quiz-system-v1";
+﻿const CACHE_NAME = "quiz-system-v2";
 const APP_ASSETS = [
   "./",
   "./index.html",
@@ -22,6 +22,7 @@ const APP_ASSETS = [
   "./icons/icon-192.png",
   "./icons/icon-512.png",
   "./icons/apple-touch-icon.png",
+  "./icons/logo.png",
   "./icons/splash-1170x2532.png"
 ];
 
@@ -64,3 +65,4 @@ self.addEventListener("fetch", (event) => {
         }))
   );
 });
+
