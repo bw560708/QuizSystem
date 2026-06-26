@@ -13,6 +13,9 @@
   color: var(--muted);
 }
 
+.app-header > div:first-child {
+  min-width: 0;
+}
 
 .header-side {
   display: grid;
@@ -120,12 +123,15 @@
 
 @media (max-width: 760px) {
   .app-header {
+    align-items: flex-start;
+    gap: 12px;
     padding: 18px 16px;
   }
 
   .header-side {
+    flex: 0 0 auto;
     justify-items: end;
-    width: 100%;
+    width: auto;
   }
 
   .header-stats {
@@ -133,7 +139,7 @@
   }
 
   .app-logo {
-    width: min(120px, 40vw);
+    width: min(104px, 28vw);
   }
 
   .app-shell {
@@ -141,7 +147,6 @@
     margin: 14px auto 32px;
   }
 
-  .app-header,
   .panel-heading,
   .quiz-toolbar,
   .quiz-navigation {
@@ -156,6 +161,10 @@
   }
 }
 @media (max-width: 420px) {
+  .app-logo {
+    width: min(92px, 30vw);
+  }
+
   .app-shell {
     width: min(100% - 12px, 1180px);
   }
