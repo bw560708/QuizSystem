@@ -39,9 +39,14 @@
 
 .tabs {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 16px;
+}
+
+.nav-stats {
+  align-items: center;
 }
 
 .view {

@@ -26,10 +26,6 @@
       </div>
       <div class="header-side">
         <img class="app-logo" src="./icons/logo.png" alt="無微 logo">
-        <div class="header-stats" aria-live="polite">
-          <span id="questionBankCount">題庫 0 題</span>
-          <span id="wrongCount">錯題 0 題</span>
-        </div>
       </div>
     </header>
 
@@ -39,6 +35,10 @@
         <button class="tab-button" type="button" data-view="practiceSetupView">開始刷題</button>
         <button class="tab-button" type="button" data-view="wrongBookView">錯題本</button>
         <button class="tab-button" type="button" data-view="historyView">作答紀錄</button>
+        <div class="header-stats nav-stats" aria-live="polite">
+          <span id="questionBankCount">題庫 0 題</span>
+          <span id="wrongCount">錯題 0 題</span>
+        </div>
       </nav>
 
       <section id="importView" class="view is-active">
