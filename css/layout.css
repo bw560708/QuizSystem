@@ -22,7 +22,7 @@
 
 .app-logo {
   display: block;
-  width: min(180px, 28vw);
+  width: min(150px, 24vw);
   height: auto;
   object-fit: contain;
 }
@@ -119,12 +119,16 @@
   }
 
   .header-side {
-    justify-items: start;
+    justify-items: end;
     width: 100%;
   }
 
+  .header-stats {
+    justify-content: flex-end;
+  }
+
   .app-logo {
-    width: min(150px, 46vw);
+    width: min(120px, 40vw);
   }
 
   .app-shell {
