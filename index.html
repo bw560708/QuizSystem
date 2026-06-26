@@ -1,0 +1,202 @@
+﻿<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#176b87">
+    <meta name="description" content="完全離線運作的選擇題刷題系統">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="刷題系統">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
+    <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+    <link rel="apple-touch-startup-image" href="./icons/splash-1170x2532.png">
+    <title>電腦單機版選擇題刷題系統</title>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/layout.css">
+    <link rel="stylesheet" href="./css/components.css">
+    <link rel="stylesheet" href="./css/theme.css">
+  </head>
+  <body>
+    <header class="app-header">
+      <div>
+        <h1>選擇題刷題系統</h1>
+        <p>完全離線，本機保存題庫、作答紀錄與錯題紀錄</p>
+      </div>
+      <div class="header-stats" aria-live="polite">
+        <span id="questionBankCount">題庫 0 題</span>
+        <span id="wrongCount">錯題 0 題</span>
+      </div>
+    </header>
+
+    <main class="app-shell">
+      <nav class="tabs" aria-label="主要功能">
+        <button class="tab-button is-active" type="button" data-view="importView">題庫匯入</button>
+        <button class="tab-button" type="button" data-view="practiceSetupView">開始刷題</button>
+        <button class="tab-button" type="button" data-view="wrongBookView">錯題本</button>
+        <button class="tab-button" type="button" data-view="historyView">作答紀錄</button>
+      </nav>
+
+      <section id="importView" class="view is-active">
+        <div class="panel-grid">
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>Excel / CSV 題庫匯入</h2>
+              <span class="badge">.xlsx / .csv</span>
+            </div>
+            <div class="drop-zone">
+              <input id="excelFileInput" type="file" accept=".xlsx,.csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv">
+              <p>Excel / CSV 欄位固定為：題目、選項A、選項B、選項C、選項D、正確答案</p>
+            </div>
+            <div class="actions">
+              <button id="importExcelButton" class="primary-button" type="button">匯入題庫</button>
+              <button id="loadSampleButton" type="button">載入範例題庫</button>
+              <button id="clearBankButton" class="danger-button" type="button">清空題庫</button>
+            </div>
+            <p id="importMessage" class="message" aria-live="polite"></p>
+          </section>
+
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>全部題庫</h2>
+              <span id="bankPreviewCount" class="badge">0 題</span>
+            </div>
+            <div id="questionPreviewList" class="list"></div>
+          </section>
+        </div>
+      </section>
+
+      <section id="practiceSetupView" class="view">
+        <section class="panel setup-panel">
+          <div class="panel-heading">
+            <h2>刷題設定</h2>
+            <span id="availableQuestionCount" class="badge">可抽 0 題</span>
+          </div>
+          <div class="form-grid">
+            <label>
+              <span>本次題數</span>
+              <select id="questionCountSelect">
+                <option value="10">10 題</option>
+                <option value="20">20 題</option>
+                <option value="50">50 題</option>
+                <option value="custom">自訂題數</option>
+              </select>
+            </label>
+            <label id="customCountField" class="is-hidden">
+              <span>自訂題數</span>
+              <input id="customQuestionCount" type="number" min="1" step="1" value="10">
+            </label>
+            <label>
+              <span>滿分</span>
+              <input id="fullScoreInput" type="number" min="1" step="1" value="100">
+            </label>
+            <label class="checkbox-row">
+              <input id="wrongOnlyToggle" type="checkbox">
+              <span>只練習錯題</span>
+            </label>
+          </div>
+          <div class="actions">
+            <button id="startQuizButton" class="primary-button" type="button">隨機出題</button>
+          </div>
+          <p id="setupMessage" class="message" aria-live="polite"></p>
+        </section>
+      </section>
+
+      <section id="quizView" class="view">
+        <section class="quiz-surface">
+          <div class="quiz-toolbar">
+            <div>
+              <span id="quizProgress" class="badge">第 0 題 / 共 0 題</span>
+              <span id="quizType" class="badge">單選題</span>
+            </div>
+            <button id="submitQuizButton" class="danger-button" type="button">交卷</button>
+          </div>
+          <article class="question-card">
+            <div class="question-meta">
+              <span id="currentQuestionId">題號</span>
+            </div>
+            <h2 id="currentQuestionText"></h2>
+            <div id="optionList" class="option-list"></div>
+          </article>
+          <div class="quiz-navigation">
+            <button id="previousQuestionButton" type="button">上一題</button>
+            <button id="nextQuestionButton" class="primary-button" type="button">下一題</button>
+          </div>
+        </section>
+      </section>
+
+      <section id="resultView" class="view">
+        <section class="panel">
+          <div class="panel-heading">
+            <h2>交卷結果</h2>
+            <span id="resultSummaryBadge" class="badge">0 分</span>
+          </div>
+          <div id="scoreSummary" class="score-grid"></div>
+          <div class="actions">
+            <button id="reviewWrongButton" type="button">查看錯題本</button>
+            <button id="newQuizButton" class="primary-button" type="button">重新刷題</button>
+          </div>
+        </section>
+        <section class="panel">
+          <div class="panel-heading">
+            <h2>逐題檢討</h2>
+          </div>
+          <div id="resultList" class="list"></div>
+        </section>
+      </section>
+
+      <section id="wrongBookView" class="view">
+        <section class="panel">
+          <div class="panel-heading">
+            <h2>錯題本</h2>
+            <span id="wrongBookCount" class="badge">0 題</span>
+          </div>
+          <div class="actions">
+            <button id="practiceWrongButton" class="primary-button" type="button">只練習錯題</button>
+            <button id="clearAllWrongButton" class="danger-button" type="button">清除全部錯題紀錄</button>
+          </div>
+          <div id="wrongBookList" class="list"></div>
+        </section>
+      </section>
+
+      <section id="historyView" class="view">
+        <section class="panel">
+          <div class="panel-heading">
+            <h2>作答紀錄</h2>
+            <span id="historyCount" class="badge">0 次</span>
+          </div>
+          <div id="historyList" class="list"></div>
+        </section>
+      </section>
+    </main>
+
+    <template id="questionPreviewTemplate">
+      <article class="list-item"></article>
+    </template>
+
+    <script>
+      window.quizSystemModuleLoaded = false;
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+          navigator.serviceWorker.register("./service-worker.js").catch(function () {});
+        });
+      }
+      window.addEventListener("load", function () {
+        window.setTimeout(function () {
+          if (!window.quizSystemModuleLoaded && !window.quizSystemStandaloneLoaded) {
+            var script = document.createElement("script");
+            script.src = "./js/standalone.js";
+            document.body.appendChild(script);
+          }
+        }, 800);
+      });
+    </script>
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>
+
+
+
+
+

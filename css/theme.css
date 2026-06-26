@@ -1,0 +1,26 @@
+::selection {
+  background: #b7d9e4;
+}
+
+.focus-note {
+  color: var(--warning);
+  font-weight: 800;
+}
+
+.answer-pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  background: #eef3f5;
+  color: var(--text);
+  font-weight: 700;
+  padding: 2px 8px;
+}
+
+.empty-state {
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  color: var(--muted);
+  padding: 18px;
+  text-align: center;
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "question": "TCP 是什麼？",
+    "options": {
+      "A": "網路協定",
+      "B": "作業系統",
+      "C": "CPU",
+      "D": "記憶體"
+    },
+    "answers": ["A"]
+  },
+  {
+    "question": "下列哪些屬於前端基礎技術？",
+    "options": {
+      "A": "HTML",
+      "B": "CSS",
+      "C": "JavaScript",
+      "D": "SQL Server"
+    },
+    "answers": ["A", "B", "C"]
+  },
+  {
+    "question": "localStorage 的資料主要保存在哪裡？",
+    "options": {
+      "A": "使用者本機瀏覽器",
+      "B": "遠端資料庫",
+      "C": "雲端主機",
+      "D": "郵件伺服器"
+    },
+    "answers": ["A"]
+  }
+]

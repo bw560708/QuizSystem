@@ -1,0 +1,116 @@
+﻿:root {
+  color-scheme: light;
+  font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+  line-height: 1.5;
+  --bg: #f5f7f9;
+  --surface: #ffffff;
+  --surface-strong: #f0f4f6;
+  --text: #182126;
+  --muted: #66737a;
+  --line: #dce4e8;
+  --primary: #176b87;
+  --primary-strong: #0d5067;
+  --accent: #7a5c1f;
+  --danger: #b33a3a;
+  --danger-strong: #8f2929;
+  --success: #26734d;
+  --warning: #b26a00;
+  --shadow: 0 12px 32px rgba(21, 42, 52, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  min-height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  overflow-wrap: anywhere;
+  cursor: pointer;
+  padding: 8px 14px;
+}
+
+button:hover {
+  border-color: var(--primary);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+input,
+select {
+  width: 100%;
+  min-height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  overflow-wrap: anywhere;
+  padding: 8px 10px;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 4px;
+  font-size: clamp(1.4rem, 2vw, 2rem);
+}
+
+h2 {
+  margin-bottom: 0;
+  font-size: 1.2rem;
+}
+
+.is-hidden {
+  display: none !important;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+@media (max-width: 760px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 420px) {
+  h1 {
+    font-size: 1.35rem;
+  }
+
+  h2 {
+    font-size: 1.08rem;
+  }
+}
+

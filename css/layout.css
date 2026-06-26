@@ -1,0 +1,141 @@
+﻿.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px clamp(16px, 4vw, 48px);
+  background: #e8f0f2;
+  border-bottom: 1px solid var(--line);
+}
+
+.app-header p {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.header-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.app-shell {
+  width: min(1180px, calc(100% - 32px));
+  margin: 24px auto 48px;
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.view {
+  display: none;
+}
+
+.view.is-active {
+  display: block;
+}
+
+.panel-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.9fr) minmax(320px, 1.1fr);
+  gap: 16px;
+}
+
+.panel,
+.quiz-surface {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  padding: 18px;
+}
+
+.panel-heading,
+.quiz-toolbar,
+.quiz-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(180px, 1fr));
+  gap: 14px;
+}
+
+.setup-panel {
+  max-width: 760px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.question-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 18px;
+  background: var(--surface-strong);
+}
+
+.question-meta {
+  margin-bottom: 10px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.score-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+@media (max-width: 760px) {
+  .app-header {
+    padding: 18px 16px;
+  }
+
+  .app-shell {
+    width: min(100% - 20px, 1180px);
+    margin: 14px auto 32px;
+  }
+
+  .app-header,
+  .panel-heading,
+  .quiz-toolbar,
+  .quiz-navigation {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .panel-grid,
+  .form-grid,
+  .score-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 420px) {
+  .app-shell {
+    width: min(100% - 12px, 1180px);
+  }
+
+  .header-stats {
+    width: 100%;
+  }
+
+  .score-grid {
+    gap: 8px;
+  }
+}
+
