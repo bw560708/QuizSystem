@@ -355,14 +355,29 @@ function renderResult(result) {
   result.details.forEach((detail, index) => {
     const item = document.createElement("article");
     item.className = `list-item ${detail.correct ? "is-correct" : "is-wrong"}`;
+    const displayedCorrectAnswers = detail.correct
+      ? formatAnswers(detail.correctAnswers)
+      : formatOptionDescriptions(detail.question, detail.correctAnswers);
     item.innerHTML = `
       <h3>${index + 1}. ${escapeHtml(detail.question.question)}</h3>
       <p>結果：${detail.correct ? "答對" : "答錯"}</p>
-      <p>正確答案：${escapeHtml(formatAnswers(detail.correctAnswers))}</p>
       <p>我的答案：${escapeHtml(formatAnswers(detail.userAnswers))}</p>
+      <p>正確答案：${escapeHtml(displayedCorrectAnswers)}</p>
     `;
     elements.resultList.append(item);
   });
+}
+
+/**
+ * Formats answer letters with their option descriptions.
+ * @param {Object} question
+ * @param {Array<string>} answers
+ * @returns {string}
+ */
+function formatOptionDescriptions(question, answers) {
+  return answers
+    .map((answer) => `${answer}. ${question.options[answer] || ""}`.trim())
+    .join("；");
 }
 
 /**
@@ -441,8 +456,8 @@ function renderWrongBook(wrongItems) {
     row.innerHTML = `
       <h3>${escapeHtml(item.question.question)}</h3>
       <p>題號：${escapeHtml(item.questionId)}</p>
-      <p>正確答案：${escapeHtml(formatAnswers(item.correctAnswers))}</p>
       <p>我的答案：${escapeHtml(formatAnswers(item.userAnswers))}</p>
+      <p>正確答案：${escapeHtml(formatOptionDescriptions(item.question, item.correctAnswers))}</p>
       <p>錯誤次數：${item.errorCount} ${item.isImportant ? "<span class=\"focus-note\">【★★★★★ 重點提醒】</span>" : ""}</p>
     `;
     const button = document.createElement("button");
